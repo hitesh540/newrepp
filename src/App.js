@@ -1,25 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef } from 'react';
+import { useReactToPrint } from 'react-to-print';
 
-function App() {
+import { ComponentToPrint } from './ComponentToPrint';
+import { Test } from './Test';
+
+const App = () => {
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ComponentToPrint ref={componentRef} />
+      <button style={{ marginLeft: "700px" }} onClick={handlePrint}>Print this out!</button>
     </div>
   );
-}
+};
 
 export default App;
+
+
+
+
+
+// import logo from './logo.svg';
+// import './App.css';
+
+// function App() {
+//   return (
+//     <div>
+      
+//         <h1>hello</h1>
+
+//     </div>
+//   );
+// }
+
+// export default App;
+
+
